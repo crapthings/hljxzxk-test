@@ -1,12 +1,15 @@
 const fs = require('fs')
+const get = require('lodash/get')
 const express = require('express')
-const app = express()
 
 const db = JSON.parse(fs.readFileSync('./db.json', { encoding: 'utf-8' }))
 
+const app = express()
+
 app.get('/', function (req, res) {
   const { code } = req.query
-  const result = db[code]
+  const result = get(db, code)
+  if (!result) return res.sendStatus(500)
   res.send(result)
 })
 

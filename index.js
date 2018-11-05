@@ -1,14 +1,15 @@
 const fs = require('fs')
-const micro = require('micro')
+const express = require('express')
+const app = express()
 
 const db = JSON.parse(fs.readFileSync('./db.json', { encoding: 'utf-8' }))
 
-const server = micro((req, res) => {
-  const code = req.url.replace('/?code=', '')
+app.get('/', function (req, res) {
+  const { code } = req.query
   const result = db[code]
-  return result
+  res.send(result)
 })
 
-server.listen(8910, () => {
+app.listen(8910, () => {
   console.log('port 8910')
 })

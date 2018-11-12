@@ -8,6 +8,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "ip": "^1.1.5",
     "lodash": "^4.17.11"
   }
 }
